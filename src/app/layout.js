@@ -3,6 +3,7 @@ import "./globals.css";
 import Image from "next/image";
 
 import logo from "../../public/images/logo.png";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,10 +17,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <div className="max-w-screen-xl flex justify-between mx-auto p-4">
-          <div className="flex space-x-4">
-            <a href="/" className="text-[#1E1E1E] hover:text-gray-700">Terms of Conditional</a>
-            <a href="/" className="text-[#1E1E1E] hover:text-gray-700">Terms of Use</a>
-            <a href="/" className="text-[#1E1E1E] hover:text-gray-700">Legal</a>
+          <div className="flex space-x-6">
+            <a href="/" className="text-[#1E1E1E] text-sm hover:text-gray-700">Terms of Conditional</a>
+            <a href="/" className="text-[#1E1E1E] text-sm hover:text-gray-700">Terms of Use</a>
+            <a href="/" className="text-[#1E1E1E] text-sm hover:text-gray-700">Legal</a>
           </div>
           <div className="flex space-x-4">
             <a href="/" className="text-[#1E1E1E] hover:text-gray-700">Bahasa Indonesia</a>
@@ -27,8 +28,8 @@ export default function RootLayout({ children }) {
         </div>
         <nav class="bg-white border-gray-200">
           <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-              <Image src={logo} class="h-8" alt="Temu Ekspor Logo" />
+            <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+              <Image src={logo} class="h-8" width="180" height="40" alt="Temu Ekspor Logo" />
               {/* <span class="self-center text-2xl font-semibold whitespace-nowrap">Flowbite</span> */}
             </a>
             <div class="flex md:order-2">
@@ -65,25 +66,25 @@ export default function RootLayout({ children }) {
               </div>
               <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                 <li>
-                  <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0" aria-current="page">Lineup Products</a>
+                  <a href="/products" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0" aria-current="page">Lineup Products</a>
                 </li>
                 <li>
-                  <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Find Suppliers</a>
+                  <a href="/" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Find Suppliers</a>
                 </li>
                 <li>
-                  <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Export Information</a>
+                  <a href="/information" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Export Information</a>
                 </li>
                 <li>
-                  <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Our Services</a>
+                  <a href="/services" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Our Services</a>
                 </li>
                 <li>
-                  <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Stories</a>
+                  <a href="/" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Stories</a>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div className="max-w-screen-xl items-center justify-between mx-auto p-4">
           {children}
         </div>
       </body>
