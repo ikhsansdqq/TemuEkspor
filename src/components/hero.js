@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
     return (
-        <div className="relative rounded flex items-center justify-between max-w-screen-xl mx-auto bg-blue-400 bg-[url('/images/cargo-2.png')] bg-no-repeat bg-center">
+        <div className="relative flex items-center justify-between max-w-screen-xl mx-auto bg-blue-400 bg-[url('/images/cargo-2.png')] bg-no-repeat bg-center">
             <div className="w-full h-full flex items-center justify-end text-end">
                 <div className="w-1/2 p-12">
                     <p className="text-gray-100 text-sm mb-2">Export & Import Portal for International Trades</p>

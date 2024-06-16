@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="max-w-screen-xl flex justify-between mx-auto p-4">
+        <div className="max-w-screen-xl flex justify-between mx-auto py-4">
           <div className="flex space-x-6">
             <a href="/" className="text-[#1E1E1E] text-sm hover:text-gray-700">Terms of Conditional</a>
             <a href="/" className="text-[#1E1E1E] text-sm hover:text-gray-700">Terms of Use</a>
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
           </div>
         </div>
         <nav class="bg-white border-gray-200">
-          <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4">
             <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
               <Image src={logo} class="h-8" width="180" height="40" alt="Temu Ekspor Logo" />
               {/* <span class="self-center text-2xl font-semibold whitespace-nowrap">Flowbite</span> */}
@@ -84,9 +84,23 @@ export default function RootLayout({ children }) {
             </div>
           </div>
         </nav>
-        <div className="max-w-screen-xl items-center justify-between mx-auto p-4">
+        <div className="max-w-screen-xl items-center justify-between mx-auto">
           {children}
         </div>
+        <footer className="bg-black text-white py-6 w-full absolute bottom-0">
+            <div className="max-w-screen-xl mx-auto px-4 flex justify-between items-center">
+                <div className="flex items-center">
+                  <Image src={logo} alt="Logo" className="h-8 mr-3" />
+                    {/* <img src="/path/to/logo.png" alt="Logo" className="h-8 mr-3" /> */}
+                    <span className="text-xl font-bold">TEMUEKSPOR</span>
+                </div>
+                <div className="flex space-x-4">
+                    <a href="#" className="text-blue-400 hover:text-blue-600">Link 1</a>
+                    <a href="#" className="text-blue-400 hover:text-blue-600">Link 2</a>
+                    <a href="#" className="text-blue-400 hover:text-blue-600">Link 3</a>
+                </div>
+            </div>
+        </footer>
       </body>
     </html>
   );
