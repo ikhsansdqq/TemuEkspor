@@ -25,8 +25,8 @@ export default function RootLayout({ children }) {
           <div className="flex space-x-4">
             <a href="/" className="text-[#1E1E1E] hover:text-gray-700">Bahasa Indonesia</a>
             <a href="/profile/register" className="text-[#1E1E1E] hover:text-gray-700">Register</a>
-            <a href="/profile/login" className="text-[#1E1E1E] hover:text-gray-700">Login</a>
-            <a href="/profile" className="text-[#1E1E1E] hover:text-gray-700">Account</a>
+            {/* <a href="/profile/login" className="text-[#1E1E1E] hover:text-gray-700">Login</a> */}
+            {/* <a href="/profile" className="text-[#1E1E1E] hover:text-gray-700">Account</a> */}
           </div>
         </div>
         <nav class="bg-white border-gray-200">
