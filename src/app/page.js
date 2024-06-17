@@ -1,4 +1,4 @@
-import Link from "next/link";
+"use client"
 
 import Hero from "../components/hero";
 import SearchBox from "../components/searchbox";
