@@ -90,20 +90,6 @@ export default function RootLayout({ children }) {
         <div className="max-w-screen-xl items-center justify-between mx-auto">
           {children}
         </div>
-        <footer className="bg-black text-white py-6 w-full absolute bottom-0">
-            <div className="max-w-screen-xl mx-auto px-4 flex justify-between items-center">
-                <div className="flex items-center">
-                  <Image src={logo} alt="Logo" className="h-8 mr-3" />
-                    {/* <img src="/path/to/logo.png" alt="Logo" className="h-8 mr-3" /> */}
-                    <span className="text-xl font-bold">TEMUEKSPOR</span>
-                </div>
-                <div className="flex space-x-4">
-                    <a href="#" className="text-blue-400 hover:text-blue-600">Link 1</a>
-                    <a href="#" className="text-blue-400 hover:text-blue-600">Link 2</a>
-                    <a href="#" className="text-blue-400 hover:text-blue-600">Link 3</a>
-                </div>
-            </div>
-        </footer>
       </body>
     </html>
   );
