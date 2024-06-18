@@ -27,9 +27,9 @@ export default function SearchBox() {
   };
 
   return (
-    <div className="max-w-screen-xl mb-8 mx-auto">
+    <div className="max-w-screen-xl mb-8 mx-auto px-4 lg:px-0">
       <div className="mb-4">
-        <label htmlFor="search" className=" text-lg font-medium text-black">
+        <label htmlFor="search" className="text-lg font-medium text-black hidden ">
           Search Products
         </label>
       </div>
