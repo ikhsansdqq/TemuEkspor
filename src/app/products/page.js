@@ -5,7 +5,12 @@ import Head from 'next/head';
 import Modal from '@/components/Modal';
 import CustomToast from '@/components/CustomToast';
 
+import Image from 'next/image';
+import { Skeleton } from '@mui/material';
+
 export default function Home() {
+    const [loaded, setLoaded] = useState(false)
+
     const products = [
         { name: 'Tea', image: '/path/to/tea-image.png' },
         { name: 'Coffee', image: '/path/to/coffee-image.png' },
@@ -56,7 +61,22 @@ export default function Home() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {products.map((product, index) => (
                         <div key={index} className="border rounded-lg shadow-lg overflow-hidden">
-                            <div className="bg-blue-500 w-full h-32"></div>
+                            <Image src={product.image} 
+                            alt={product.name} 
+                            width={300} 
+                            height={200} 
+                            className={`${(!loaded) ? 'opacity-0': 'opacity-100'}}`}
+                            onLoad={() => setLoaded(true)}
+                            />
+                            {!loaded && (
+                                <Skeleton
+                                    sx={{ bgcolor: 'grey.100' }}
+                                    variant="rectangular"
+                                    width="100%"
+                                    height="100%"
+                                />
+                            )}
+                            {/* <div className="bg-blue-500 w-full h-32"></div> */}
                             <div className="p-4">
                                 <h3 className="text-lg font-semibold">{product.name}</h3>
                                 <button
