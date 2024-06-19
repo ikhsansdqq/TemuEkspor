@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    fastRefresh: true,
-    concurrentFeatures: true,
     images: {
         formats: ['image/avif', 'image/webp'],
         remotePatterns: [
