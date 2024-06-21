@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 
-import logo from "../../public/images/logo.png";
+import logo from "../../public/images/browser-logo.png";
 import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,12 +30,12 @@ export default function RootLayout({ children }) {
             </a>
           </div>
           <div className="flex space-x-12 items-center">
-            <a href="/" className="text-[#1E1E1E] hover:text-gray-700">
+            {/* <a href="/" className="text-[#1E1E1E] hover:text-gray-700">
               Bahasa Indonesia
-            </a>
+            </a> */}
             <div className="flex space-x-8 items-center">
               <a
-                href="/profile/register"
+                href="/profile/login"
                 className="text-[#1E1E1E] hover:text-gray-700 font-semibold">
                 <u>Login</u></a>
               <a
@@ -46,13 +46,15 @@ export default function RootLayout({ children }) {
           </div>
         </div>
 
-        <nav className="bg-white dark:bg-gray-900">
-          <div className="max-w-screen-xl flex flex-wrap flex-row sm:flex-wrap items-center justify-between mx-auto py-4 px-4 lg:px-0">
+        <nav className="bg-white dark:bg-gray-900 items-center px-4">
+          <div className="max-w-screen-xl flex flex-wrap flex-row sm:flex-wrap items-center justify-between mx-auto py-2 lg:px-0">
             <a
               href="/"
               className="flex items-center space-x-3 rtl:space-x-reverse">
               <Image
-                className="w-44 h-10"
+                height={50}
+                width={50}
+                className="items-center justify-center"
                 src={logo}
                 alt="Temu Ekspor Logo"/>
             </a>
@@ -87,14 +89,13 @@ export default function RootLayout({ children }) {
               </button>
             </div>
             <div
-              className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+              className="items-center hidden w-full md:flex md:w-auto md:order-1 bg-white"
               id="navbar-cta">
-              <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <ul className="flex flex-col items-center font-medium p-4 md:p-0 mt-4 bg-white border border-gray-100 rounded-lg md:space-x-6 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
                   <a
                     href="/career"
-                    className="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-                    aria-current="page">
+                    className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                     Career
                   </a>
                 </li>
@@ -107,14 +108,14 @@ export default function RootLayout({ children }) {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/suppliers"
                     className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                     Find Suppliers
                   </a>
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/information"
                     className="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                     Export Information
                   </a>
@@ -126,11 +127,11 @@ export default function RootLayout({ children }) {
                     Our Teams
                   </a>
                 </li>
-                  <button
-                    type="button"
-                    className="text-white visible lg:invisible bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <Link href={'/profile/register'}>Get Started</Link>
-                  </button>
+                <button
+                  type="button"
+                  className="text-white visible lg:hidden bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <Link href={'/profile/register'}>Get Started</Link>
+                </button>
               </ul>
             </div>
           </div>

@@ -1,58 +1,66 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, Router } from "next/navigation";
-
+import { useRouter } from "next/navigation";
+import { auth, googleProvider } from "@/api/firebase";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import CustomToast from "@/components/CustomToast";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
   const [passwordShown, setPasswordShown] = useState(false); // Add this state
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError(""); // Reset error message
 
-    const response = await fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const data = await response.json();
-
-    if (data.user) {
-      // Save user to localStorage
-      localStorage.setItem("user", JSON.stringify(data.user));
-      setLoading(false);
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log("User signed in:", user.uid);
       setSuccess(true);
-      router.push("/profile");
-    } else {
+      setTimeout(() => {
+        setSuccess(false);
+        router.push("/products"); // Redirect to products after success
+      }, 3000); // Hide toast after 3 seconds
+    } catch (error) {
+      console.error("Error during login:", error);
+      setError(error.message);
       setLoading(false);
-      alert(data.message);
     }
   };
 
-  const handleSocialLogin = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+      console.log("Google user signed in:", user);
       setSuccess(true);
-    }, 3000);
+      setTimeout(() => {
+        setSuccess(false);
+        router.push("/products"); // Redirect to products after success
+      }, 3000); // Hide toast after 3 seconds
+    } catch (error) {
+      console.error("Error during Google sign-in:", error);
+      setError(error.message);
+    }
   };
 
   return (
     <div className="flex items-center justify-center py-12 px-4 sm:px-2 lg:px-8">
       <div className="max-w-xl w-full space-y-6 bg-white p-10 rounded-xl border">
         <h2 className="text-center text-3xl font-extrabold text-gray-900">
-          Lets Get You Back In,
+          Welcome!
         </h2>
         <p className="text-center text-sm text-gray-600">
           In terms of user security, we always comply with the standard user
@@ -101,39 +109,8 @@ export default function Login() {
               <button
                 type="button"
                 className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600"
-                onClick={() => setPasswordShown(!passwordShown)}
-              >
-                {passwordShown ? (
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 12a3 3 0 01-3 3m0-6a3 3 0 013 3m0 0a3 3 0 00-3 3m0-6a3 3 0 00-3 3m0 0a3 3 0 003 3m0 0a3 3 0 003-3"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 12a3 3 0 01-3 3m0-6a3 3 0 013 3m0 0a3 3 0 00-3 3m0-6a3 3 0 00-3 3m0 0a3 3 0 003 3m0 0a3 3 0 003-3"
-                    />
-                  </svg>
-                )}
+                onClick={() => setPasswordShown(!passwordShown)}>
+                {passwordShown ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
           </div>
@@ -154,29 +131,24 @@ export default function Login() {
         </div>
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <button
-            onClick={handleSocialLogin}
-            className="w-full inline-flex justify-center items-center gap-2 py-3 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-          >
-            <FaFacebookF className="h-6 w-6" />
-            Facebook Sign In
-          </button>
-          <button
-            onClick={handleSocialLogin}
+            onClick={handleGoogleLogin}
             className="w-full inline-flex justify-center items-center gap-2 py-3 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             <FcGoogle className="h-6 w-6" />
             Google Sign In
           </button>
+          <button
+            className="w-full inline-flex justify-center items-center gap-2 py-3 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            <FaFacebookF className="h-6 w-6" />
+            Facebook Sign In
+          </button>
         </div>
         {success && (
-          <div
-            className="mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-            role="alert"
-          >
-            <span className="block sm:inline">
-              Success! You are now signed in.
-            </span>
-          </div>
+          <CustomToast message="Success! You are now signed in." onDismiss={() => setSuccess(false)} />
+        )}
+        {error && (
+          <CustomToast message={error} onDismiss={() => setError("")} />
         )}
       </div>
     </div>

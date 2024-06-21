@@ -2,39 +2,54 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
+import { auth, googleProvider } from "@/api/firebase";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import CustomToast from "@/components/CustomToast";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
-    const response = await fetch("/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const data = await response.json();
-
-    if (data.user) {
-      // Save user to localStorage
-      localStorage.setItem("user", JSON.stringify(data.user));
-      setLoading(false);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log("User registered:", user.uid);
       setSuccess(true);
-    } else {
+      setTimeout(() => {
+        setSuccess(false);
+        router.push('/profile/login');
+      }, 3000);
+    } catch (error) {
+      console.error("Error during registration:", error);
+      setError(error.message);
       setLoading(false);
-      alert(data.message);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      console.log("Google user signed in:", user);
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+        router.push('/profile/login');
+      }, 3000);
+    } catch (error) {
+      console.error("Error during Google sign-in:", error);
+      setError(error.message);
     }
   };
 
@@ -64,8 +79,7 @@ export default function Register() {
           to your account here if you already have an account before. But, if
           you do not have any account yet, we suggest you create an account.
         </p>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <input type="hidden" name="remember" value="true" />
+        <form className="mt-8 space-y-6" onSubmit={handleRegister}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">
@@ -75,6 +89,7 @@ export default function Register() {
                 id="email-address"
                 name="email"
                 type="email"
+                autoComplete="email"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
@@ -98,7 +113,11 @@ export default function Register() {
               />
             </div>
           </div>
-
+          {email && (
+            <div className="mt-1 text-start text-sm text-gray-600">
+              Username: {email.split('@')[0]}
+            </div>
+          )}
           <div>
             <button
               type="submit"
@@ -115,29 +134,25 @@ export default function Register() {
         </div>
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <button
+            onClick={handleGoogleLogin}
+            className="w-full inline-flex justify-center items-center gap-2 py-3 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            <FcGoogle className="h-6 w-6" />
+            Google Sign Up
+          </button>
+          <button
             onClick={handleSocialLogin}
             className="w-full inline-flex justify-center items-center gap-2 py-3 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             <FaFacebookF className="h-6 w-6" />
             Facebook Sign Up
           </button>
-          <button
-            onClick={handleSocialLogin}
-            className="w-full inline-flex justify-center items-center gap-2 py-3 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-          >
-            <FcGoogle className="h-6 w-6" />
-            Google Sign Up
-          </button>
         </div>
         {success && (
-          <div
-            className="mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-            role="alert"
-          >
-            <span className="block sm:inline">
-              Success! Your account has been created.
-            </span>
-          </div>
+          <CustomToast message="Success! Your account has been created." onDismiss={() => setSuccess(false)} />
+        )}
+        {error && (
+          <CustomToast message={error} onDismiss={() => setError("")} />
         )}
       </div>
     </div>
