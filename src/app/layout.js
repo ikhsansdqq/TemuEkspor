@@ -7,6 +7,8 @@ import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 export const metadata = {
   title: "Temu Ekspor | Official Site",
   description:
@@ -139,6 +141,7 @@ export default function RootLayout({ children }) {
 
         <div className="max-w-screen-xl items-center justify-between mx-auto">
           {children}
+          <SpeedInsights />
         </div>
 
         <script async src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
