@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Modal from '@/components/Modal';
 import CustomToast from '@/components/CustomToast';
 import { IconTrendingUp, IconShoppingBag } from '@tabler/icons-react';
+import { auth } from '@/api/firebase'; // Import your firebase auth
 
 export default function Home() {
     const products = [
@@ -17,11 +17,29 @@ export default function Home() {
         { name: 'Charcoal', image: '/path/to/charcoal-image.png', price: 300, buyers: 200, category: 'Fossil Fuels', discount: false },
     ];
 
+    const [user, setUser] = useState(null);
     const [cartItems, setCartItems] = useState(0);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
+
+    useEffect(() => {
+        const storedCartItems = JSON.parse(localStorage.getItem('cartItems'));
+        if (storedCartItems) {
+            setSelectedProducts(storedCartItems);
+            setCartItems(storedCartItems.length);
+        }
+
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            setUser(user);
+        });
+        return () => unsubscribe();
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('cartItems', JSON.stringify(selectedProducts));
+    }, [selectedProducts]);
 
     const increaseCartItems = () => setCartItems(cartItems + 1);
 
@@ -69,7 +87,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <Modal showModal={showModal} setShowModal={setShowModal} selectedProducts={selectedProducts} />
+                <Modal showModal={showModal} setShowModal={setShowModal} selectedProducts={selectedProducts} title="Cart Details" email={user?.email} />
                 {showToast && <CustomToast message={toastMessage} onDismiss={() => setShowToast(false)} />}
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

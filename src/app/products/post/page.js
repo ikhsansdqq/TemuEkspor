@@ -12,10 +12,14 @@ const Posts = () => {
       try {
         const response = await axios.get('/api/posts');
         console.log('API Response:', response.data);  // Debug logging
-        setPosts(response.data);
+        if (Array.isArray(response.data)) {
+          setPosts(response.data);
+        } else {
+          setError('Invalid data format');
+        }
       } catch (error) {
         setError('Failed to fetch posts');
-        console.error(error);  // Debug logging
+        console.error('Fetch error:', error);  // Debug logging
       }
     };
 
@@ -26,7 +30,7 @@ const Posts = () => {
     <div>
       <h1>Posts</h1>
       {error && <p>{error}</p>}
-      {Array.isArray(posts) && posts.length > 0 ? (
+      {posts.length > 0 ? (
         <ul>
           {posts.map((post) => (
             <li key={post.post_id}>

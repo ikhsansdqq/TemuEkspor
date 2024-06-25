@@ -28,7 +28,7 @@ export default function Register() {
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
-        router.push('/profile/login');
+        router.push("/profile/account");
       }, 3000);
     } catch (error) {
       console.error("Error during registration:", error);
@@ -45,7 +45,7 @@ export default function Register() {
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
-        router.push('/profile/login');
+        router.push("/profile/account");
       }, 3000);
     } catch (error) {
       console.error("Error during Google sign-in:", error);

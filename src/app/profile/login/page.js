@@ -29,7 +29,7 @@ export default function Login() {
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
-        router.push("/products"); // Redirect to products after success
+        router.push("/profile/account"); // Redirect to products after success
       }, 3000); // Hide toast after 3 seconds
     } catch (error) {
       console.error("Error during login:", error);
@@ -48,7 +48,7 @@ export default function Login() {
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
-        router.push("/products"); // Redirect to products after success
+        router.push("/profile/account"); // Redirect to products after success
       }, 3000); // Hide toast after 3 seconds
     } catch (error) {
       console.error("Error during Google sign-in:", error);
