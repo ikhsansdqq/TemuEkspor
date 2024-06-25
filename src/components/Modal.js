@@ -68,20 +68,20 @@ const Modal = ({ showModal, setShowModal, selectedProducts = [], title, children
                                         </div>
                                     </>
                                 ) : (
-                                    <div className="mt-4 bg-gray-200">
+                                    <div className="mt-4">
                                         <p className='mb-2'>You need to be logged in to checkout.</p>
-                                        <div className='flex flex-col justify-between bg-gray-600'>
+                                        <div className='flex flex-col justify-between'>
                                             <Link href="/profile/register">
                                                 <button
                                                     type="button"
-                                                    className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                    className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                     Register Here
                                                 </button>
                                             </Link>
                                             <Link href="/profile/login">
                                                 <button
                                                     type="button"
-                                                    className="w-full text-gray-700 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2 text-center dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-800 mt-2">
+                                                    className="w-full text-gray-700 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-3 text-center dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-800 mt-2">
                                                     Login Here
                                                 </button>
                                             </Link>
