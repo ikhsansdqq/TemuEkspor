@@ -1,8 +1,11 @@
+// INDEX SEARCH FROM THE FIRESTORE / DATABASE
+
 "use client";
 
 import { useState } from "react";
 
-const dummyData = ["Coffee", "Tea", "CPO", "Crude Palm Oil"];
+const dummyData = ["Tea", "CPO", "Crude Palm Oil", "Gold", "Tea", "Silver", "Coffee", "Charcoal"];
+// handle if any duplicate data
 
 export default function SearchBox() {
   const [q, sQ] = useState("");

@@ -1,6 +1,6 @@
 "use client"
 
-import Hero from "@/components/hero";
+import Hero from "@/components/Hero";
 import SearchBox from "@/components/searchbox";
 import InfoGrid from "@/components/InfoGrid";
 
