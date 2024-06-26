@@ -1,4 +1,4 @@
-export default function Hero() {
+export default function HeroSection() {
     return (
         <div className="relative flex items-center justify-between max-w-screen-xl mx-auto bg-[url('/images/cargo-2.png')] bg-no-repeat bg-center">
             <div className="w-full flex items-center justify-end text-end">
