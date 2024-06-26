@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Hero() {
     return (
         <div className="relative flex items-center justify-between max-w-screen-xl mx-auto bg-[url('/images/cargo-2.png')] bg-no-repeat bg-center">
