@@ -11,6 +11,8 @@ export const metadata = {
       "Solution for your export needs within our local expertise community",
 };
 
+import { Analytics } from "@vercel/analytics/react"
+
 export default function RootLayout({ children }) {
 
   return (
@@ -21,6 +23,7 @@ export default function RootLayout({ children }) {
         <div className="max-w-screen-xl items-center justify-between mx-auto">
           {children}
           <SpeedInsights />
+          <Analytics/>
         </div>
 
         <script async src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
