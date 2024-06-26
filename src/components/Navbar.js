@@ -5,7 +5,7 @@ import Image from "next/image"
 
 import { auth } from "@/api/firebase";
 
-import logo from "../../public/images/browser-logo.png";
+import logo from "../../public/images/logo-vertical.png";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
@@ -28,7 +28,7 @@ export default function Navbar() {
       <nav className="bg-white dark:bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap flex-row sm:flex-wrap items-center justify-between mx-auto py-4 px-4 lg:px-0">
           <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            <Image className="w-11 h-10" src={logo} alt="Temu Ekspor Logo" />
+            <Image width={200} src={logo} alt="Temu Ekspor Logo" />
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             {user ? (

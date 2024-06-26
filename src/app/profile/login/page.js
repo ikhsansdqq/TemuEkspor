@@ -11,10 +11,10 @@ import { FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordShown, setPasswordShown] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
-  const [passwordShown, setPasswordShown] = useState(false); // Add this state
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -56,6 +56,10 @@ export default function Login() {
     }
   };
 
+  const toggleShowPassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
   return (
     <div className="flex items-center justify-center py-12 px-4 sm:px-2 lg:px-8">
       <div className="max-w-xl w-full space-y-6 bg-white p-10 rounded-xl border">
@@ -72,7 +76,7 @@ export default function Login() {
             <u>register</u>
           </a>{" "}
           to your account here if you already have an account before. But, if
-          you do not have any account yet, we suggest you to create an account.
+          you do not have any account yet, we suggest you create an account.
         </p>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" value="true" />
@@ -101,7 +105,7 @@ export default function Login() {
                 name="password"
                 type={passwordShown ? "text" : "password"} // Toggle between text and password
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -109,8 +113,10 @@ export default function Login() {
               <button
                 type="button"
                 className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600"
-                onClick={() => setPasswordShown(!passwordShown)}>
-                {passwordShown ? <FaEye /> : <FaEyeSlash />}
+                onClick={toggleShowPassword}
+                tabIndex={-1} // Prevent button from taking focus
+              >
+                {passwordShown ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
           </div>
